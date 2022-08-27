@@ -2,11 +2,11 @@ import React from 'react';
 import ActivitiesList from "../components/activitieslist"
 import { graphql } from 'gatsby';
 
-export default function CategoryTemplate({pageContext, data}) {
- const {type} = pageContext
+export default function CategoryTemplate({data}) {
+ 
  const activities = data.allStrapiActivity.edges
 
-  console.log(activities, type)
+ 
   
   return(
     <div>

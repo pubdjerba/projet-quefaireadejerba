@@ -1,14 +1,48 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 
 const strapiConfig = {
   apiURL: process.env.STRAPI_API_URL,
   accessToken: process.env.STRAPI_TOKEN,
-  collectionTypes: ['activity', 'category'],
-  
-  
-};
+  collectionTypes: [
+    {
+      singularName: "activity",
+      queryParams: {
+        populate: {
+          photo: {
+            populate: "*",
+            album: {
+              populate: "*",
+            },
+          },
+          price: {
+            populate: "*",
+          },
+          attribute: {
+            populate: "*",
+          },
+          inclusive: {
+            populate: "*",
+          },
+          review: {
+            populate: "*",
+          },
+          seo: {
+            populate: "*",
+          },
+          categories: {
+            populate: "*",
+          },
+        },
+      },
+    },
+
+    {
+      singularName: "category",
+    },
+  ],
+}
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -47,6 +81,17 @@ module.exports = {
         // theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `material icons`,
+          `material symbols outlined`,
+          `Roboto \:100,300,400,500,400i,700`, // you can also specify font weights and styles
+        ],
+        display: "swap",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
